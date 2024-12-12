@@ -38,17 +38,25 @@ func main() {
 			continue
 		}
 
-		// Логируем сообщение
-		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
-
-		// Создаем ответное сообщение
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Твой высер: "+update.Message.Text)
-		// msg.ReplyToMessageID = update.Message.MessageID
-
-		// Отправляем сообщение
-		_, err := bot.Send(msg)
-		if err != nil {
-			log.Printf("Failed to send message: %v", err)
+		
+		if update.Message.Command() == "help" {
+			helpCommand(bot, update.Message)
+			continue
 		}
+
+		defaultBehavior(bot, update.Message)
+
 	}
+}
+
+func helpCommand(bot *tgbotapi.BotAPI, inputMessage *tgbotapi.Message) {
+	msg := tgbotapi.NewMessage(inputMessage.Chat.ID, "/help  - help")
+	bot.Send(msg)
+}
+
+func defaultBehavior(bot *tgbotapi.BotAPI, inputMessage *tgbotapi.Message) {
+	log.Printf("[%s] %s", inputMessage.From.UserName, inputMessage.Text)
+	msg := tgbotapi.NewMessage(inputMessage.Chat.ID, "Твой высер: "+inputMessage.Text)
+
+	bot.Send(msg)
 }
