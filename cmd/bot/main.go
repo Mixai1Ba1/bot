@@ -38,14 +38,12 @@ func main() {
 			continue
 		}
 
-		
-		if update.Message.Command() == "help" {
+		switch update.Message.Command() {
+		case "help":
 			helpCommand(bot, update.Message)
-			continue
+		default:
+			defaultBehavior(bot, update.Message)
 		}
-
-		defaultBehavior(bot, update.Message)
-
 	}
 }
 
