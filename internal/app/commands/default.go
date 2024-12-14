@@ -22,6 +22,10 @@ func (c *Commander) HadlerUpdate(update tgbotapi.Update) {
 		}
 	}()
 
+	defer func() {
+		fmt.Println("first")
+	}()
+
 	if update.Message == nil {
 		return
 	}
