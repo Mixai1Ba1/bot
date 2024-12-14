@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -11,14 +10,22 @@ import (
 func (c *Commander) Get(inputMessage *tgbotapi.Message) {
 	args := inputMessage.CommandArguments()
 
-	arg, err := strconv.Atoi(args)
+	idx, err := strconv.Atoi(args)
 	if err != nil {
 		log.Println("wrong args", args)
 		return
 	}
 
+	product, err := c.productService.Get(idx)
+	if err != nil {
+		log.Printf("can't get pro %d: %v", idx, err)
+		return
+	}
+
 	msg := tgbotapi.NewMessage(
-		inputMessage.Chat.ID, fmt.Sprintf("success: %v", arg),
+		inputMessage.Chat.ID,
+		// fmt.Sprintf("success: %v", arg),
+		product.Title,
 	)
 	c.bot.Send(msg)
 }

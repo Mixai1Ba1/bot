@@ -1,11 +1,16 @@
 package product
 
-type Service struct {}
+type Service struct{}
 
-func NewService() *Service{
+func NewService() *Service {
 	return &Service{}
 }
 
-func (s *Service) List() []Product{
+func (s *Service) List() []Product {
 	return allProducts
 }
+
+func (s *Service) Get(idx int) (*Product, error) {
+	return &allProducts[idx], nil
+}
+// доюавить норм обработку 

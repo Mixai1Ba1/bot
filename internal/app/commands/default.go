@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"log"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -14,6 +15,13 @@ func (c *Commander) Default(inputMessage *tgbotapi.Message) {
 }
 
 func (c *Commander) HadlerUpdate(update tgbotapi.Update) {
+
+	defer func() {
+		if panicValue := recover(); panicValue != nil {
+			fmt.Printf("recovered from panic: %v", panicValue)
+		}
+	}()
+
 	if update.Message == nil {
 		return
 	}
