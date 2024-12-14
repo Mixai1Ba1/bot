@@ -39,6 +39,10 @@ func main() {
 
 	// Обрабатываем обновления
 	for update := range updates {
+<<<<<<< HEAD
 		commander.HadlerUpdate(update)
+=======
+		commander.HandleUpdate(update)
+>>>>>>> origin/master
 	}
 }
