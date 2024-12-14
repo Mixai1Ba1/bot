@@ -24,7 +24,7 @@ func (c *Commander) HadlerUpdate(update tgbotapi.Update) {
 	case "list":
 		c.List(update.Message)
 	case "get":
-		c.List(update.Message)
+		c.Get(update.Message)
 	default:
 		c.Default(update.Message)
 	}
