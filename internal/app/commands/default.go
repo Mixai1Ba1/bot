@@ -25,7 +25,7 @@ func (c *Commander) HadlerUpdate(update tgbotapi.Update) {
 	defer func() {
 		fmt.Println("first")
 	}()
-
+// первый вошел последний вышел LIFO
 	if update.Message == nil {
 		return
 	}
