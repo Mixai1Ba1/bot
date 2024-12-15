@@ -22,11 +22,22 @@ func (c *Commander) HadlerUpdate(update tgbotapi.Update) {
 		}
 	}()
 
+	if update.CallbackQuery != nil {
+		// args := strings.Split(update.CallbackQuery.Data, "_")
+		msg := tgbotapi.NewMessage(
+			update.CallbackQuery.Message.Chat.ID,
+			"купить: "+update.CallbackQuery.Data,
+			// fmt.Sprintf("command %s\n", args[0])+
+			// 	fmt.Sprintf("offset  %s\n", args[1]),
+		)
+		c.bot.Send(msg)
+		return
+	}
 	// defer func() {
 	// 	fmt.Println("first")
 	// }()
-// первый вошел последний вышел LIFO
-// аргументы все передаются по значению и сохраняются в моменте когда вывзывается дефер
+	// первый вошел последний вышел LIFO
+	// аргументы все передаются по значению и сохраняются в моменте когда вывзывается дефер
 	if update.Message == nil {
 		return
 	}

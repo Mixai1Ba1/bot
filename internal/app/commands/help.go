@@ -13,6 +13,6 @@ func (c *Commander) Help(inputMessage *tgbotapi.Message) {
 }
 
 
-func init() {
-    registeredCommands["help"] = (*Commander).Help
-}
+// func init() {
+//     registeredCommands["help"] = (*Commander).Help
+// }
