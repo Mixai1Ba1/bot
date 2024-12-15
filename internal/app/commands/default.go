@@ -22,10 +22,11 @@ func (c *Commander) HadlerUpdate(update tgbotapi.Update) {
 		}
 	}()
 
-	defer func() {
-		fmt.Println("first")
-	}()
+	// defer func() {
+	// 	fmt.Println("first")
+	// }()
 // первый вошел последний вышел LIFO
+// аргументы все передаются по значению и сохраняются в моменте когда вывзывается дефер
 	if update.Message == nil {
 		return
 	}
